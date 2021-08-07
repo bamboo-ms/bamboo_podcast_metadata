@@ -1,0 +1,14 @@
+[package]
+name = "bamboo_podcast_metadata"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.42"
+bamboo_metadata = { path = "../bamboo_metadata/" }
+chrono = "0.4.19"
+http = "0.2.4"
+isocountry = "0.3.2"
+rss = "1.10.0"
