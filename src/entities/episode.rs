@@ -1,11 +1,14 @@
 use super::{chapter::Chapter, Rating};
+use crate::uri::Uri;
 use bamboo_metadata::id_provider::IdProvider;
 use bamboo_metadata::title::Title;
-use chrono::{Duration, NaiveDate};
-use http::Uri;
+use chrono::NaiveDate;
+use serde::{Deserialize, Serialize};
+use std::time::Duration;
 
 // Contains metadata about episode file content, including URI
 // TODO: look into rss:enclosure instead
+#[derive(Serialize, Deserialize)]
 pub struct Enclosure {
     // "Specifies the location of the episode audio file." - 5.17
     pub uri: Uri,
@@ -14,6 +17,7 @@ pub struct Enclosure {
     pub length: Option<i64>,
 }
 
+#[derive(Serialize, Deserialize)]
 pub enum EpisodeId {
     Link(Uri),
     Guid(String),
@@ -32,6 +36,7 @@ impl IdProvider for EpisodeId {
     }
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct Episode {
     // "Unique provider identifier for the podcast which is stable over time." - 5.16
     pub id: EpisodeId,

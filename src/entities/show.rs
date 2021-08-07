@@ -1,18 +1,21 @@
 use super::episode::Episode;
 use super::Rating;
+use crate::uri::Uri;
 use anyhow::Error;
 use bamboo_metadata::language::Language;
 use bamboo_metadata::person::Person;
 use bamboo_metadata::title::Title;
-use http::Uri;
 use isocountry::CountryCode;
 use rss::Channel;
+use serde::{Deserialize, Serialize};
 
+#[derive(Serialize, Deserialize)]
 pub enum Chronology {
     Episodic,
     Serial,
 }
 
+#[derive(Serialize, Deserialize)]
 pub struct Category {
     // TODO: Replace with enum of supported categories
     pub name: String,
@@ -22,6 +25,7 @@ pub struct Category {
 // "Indicates a show i.e. the podcast itself. It contains the metadata for the show and
 // encapsulates all the show episodes as items. Defining multiple podcasts in the same RSS is not
 // supported." - 5.2
+#[derive(Serialize, Deserialize)]
 pub struct Show {
     // "The name by which the podcast is known." - 5.3
     pub title: Title,
