@@ -1,12 +1,10 @@
 use super::episode::Episode;
 use super::Rating;
 use crate::uri::Uri;
-use anyhow::Error;
 use bamboo_metadata::language::Language;
 use bamboo_metadata::person::Person;
 use bamboo_metadata::title::Title;
 use isocountry::CountryCode;
-use rss::Channel;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
@@ -33,11 +31,11 @@ pub struct Show {
     pub link: Uri,
     // "Phrase or short description of the podcast intending to give the consumer a quick
     // understanding of what the podcast is about." - 5.5
-    pub description: Option<String>,
+    pub description: String,
     // "Indicates the primary show language..." - 5.6
-    pub language: Language,
+    pub language: Option<Language>,
     // "The full name of the show main originator, group or person." - 5.7
-    pub author: Option<Person<String, String>>,
+    pub author: Option<Person>,
     // "Indicates the podcast artwork. This image will be used as a fallback for any podcast
     // episode not defining its own artwork." - 5.8
     pub image: Option<Uri>,
@@ -64,10 +62,4 @@ pub struct Show {
     // 5.14
     pub country_of_origin: Vec<CountryCode>,
     pub episodes: Vec<Episode>,
-}
-
-impl Show {
-    pub fn from_channel(channel: Channel) -> Result<Self, Error> {
-        todo!()
-    }
 }
